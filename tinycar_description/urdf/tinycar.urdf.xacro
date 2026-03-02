@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<robot name="tinycar" xmlns:xacro="http://ros.org/wiki/xacro">
+     <!--Gazebo and ros2 control plugins-->
+  <xacro:include filename="$(find tinycar_description)/urdf/controllers/tinycar.ros2_control.xacro"/>
+  <xacro:include filename="$(find tinycar_description)/urdf/controllers/tinycar.gazebo.xacro"/>
+    <link name="base_footprint" />
+
+    <link name="base_link">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <mesh filename="package://tinycar_description/meshes/base_link.stl"
+                  scale="0.001 0.001 0.001" />
+        </geometry>
+    </visual>
+
+    <collision>
+        <origin xyz="0 0 0.02061" rpy="0 0 0"/>
+        <geometry>
+            <box size="0.16149 0.10 0.0986" />
+        </geometry>
+    </collision>
+
+    <inertial>
+        <mass value="2.768772"/>
+        <!-- Converted mm → m -->
+        <origin xyz="-0.028754 0.002600 -0.011369" rpy="0 0 0"/>
+        <!-- Converted kg·mm² → kg·m² -->
+        <inertia
+            ixx="0.0046876"
+            ixy="-0.00002531"
+            ixz="-0.00082487"
+            iyy="0.0069378"
+            iyz="-0.00017317"
+            izz="0.0075916"/>
+    </inertial>
+    </link>
+    <link name="left_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://tinycar_description/meshes/wheel.stl"
+                      scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 -0.01 0" rpy="1.57 0 0" />
+            <geometry>
+                <cylinder length="0.02" radius="0.0225" />
+            </geometry>
+        </collision>
+
+         <inertial>
+        <mass value="0.017054"/>
+        <origin xyz="-0.00000653 -0.009275 0.00000035" rpy="0 0 0"/>
+        <inertia
+            ixx="0.0000024304"
+            ixy="0.0"
+            ixz="-0.00000000036"
+            iyy="0.0000039401"
+            iyz="0.0"
+            izz="0.0000024304"/>
+    </inertial>
+    </link>
+
+    <link name="right_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 3.14" />
+            <geometry>
+                <mesh filename="package://tinycar_description/meshes/wheel.stl"
+                      scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0.01 0" rpy="1.57 0 0" />
+            <geometry>
+                <cylinder length="0.02" radius="0.0225" />
+            </geometry>
+        </collision>
+
+        <inertial>
+        <mass value="0.017054"/>
+        <origin xyz="-0.00000653 -0.009275 0.00000035" rpy="0 0 0"/>
+        <inertia
+            ixx="0.0000024304"
+            ixy="0.0"
+            ixz="-0.00000000036"
+            iyy="0.0000039401"
+            iyz="0.0"
+            izz="0.0000024304"/>
+    </inertial>
+    </link>
+
+    <link name="caster_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://tinycar_description/meshes/caster_wheel.stl"
+                      scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <sphere radius="0.025"/>
+            </geometry>
+        </collision>
+
+    <inertial>
+        <mass value="0.009834"/>
+        <origin xyz="0.0 0.0 -0.013911" rpy="0 0 0"/>
+        <inertia
+            ixx="0.0000008909"
+            ixy="0.0"
+            ixz="0.0"
+            iyy="0.0000008909"
+            iyz="0.0"
+            izz="0.0000010717"/>
+    </inertial>
+    </link>
+
+    <joint name="virtual_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link" />
+        <origin xyz="0 0 0.05148" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="-0.04026 0.071 -0.03" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="-0.04026 -0.071 -0.03" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <joint name="base_caster_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel"/>
+        <origin xyz="0.035 0.0 -0.0265" rpy="0 0 0" />
+    </joint>
+
+</robot>

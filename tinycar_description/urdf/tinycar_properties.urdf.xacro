@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:property name="pkg_share" value="$(find tinycar_description)"/>
+
+    <xacro:property name="base_mesh_file"
+    value="file://${pkg_share}/meshes/base_link_with_pi.stl"/>
+
+    <xacro:property name="left_wheel_mesh_file"
+    value="file://${pkg_share}/meshes/wheel.stl"/>
+
+    <xacro:property name="right_wheel_mesh_file"
+    value="file://${pkg_share}/meshes/wheel.stl"/>
+
+    <!-- Wheel joint origins -->
+    <xacro:property name="left_xyz" value="0.0 0.0 0.0"/>
+
+
+    <!-- Base inertial -->
+<xacro:property name="base_mass" value="0.85"/>
+<xacro:property name="base_com" value="0 0 0"/>
+
+<xacro:property name="base_ixx" value="0.00150"/>
+<xacro:property name="base_iyy" value="0.00260"/>
+<xacro:property name="base_izz" value="0.00273"/>
+<xacro:property name="base_ixy" value="0.0"/>
+<xacro:property name="base_ixz" value="0.0"/>
+<xacro:property name="base_iyz" value="0.0"/>
+
+<!-- Wheel inertial -->
+<xacro:property name="wheel_mass" value="0.02"/>
+<xacro:property name="wheel_com" value="0 0 0"/>
+
+<xacro:property name="wheel_ixx" value="0.00000305"/>
+<xacro:property name="wheel_iyy" value="0.00000506"/>
+<xacro:property name="wheel_izz" value="0.00000305"/>
+<xacro:property name="wheel_ixy" value="0.0"/>
+<xacro:property name="wheel_ixz" value="0.0"/>
+<xacro:property name="wheel_iyz" value="0.0"/>
+
+</robot>

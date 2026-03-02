@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <gazebo reference="left_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <kp>100000.0</kp>
+        <kd>100.0</kd>
+    </gazebo>
+    <gazebo reference="right_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <kp>100000.0</kp>
+        <kd>100.0</kd>
+    </gazebo>
+    <gazebo reference="caster_wheel">
+        <mu1>1.0</mu1>
+        <mu2>1.0</mu2>
+        <kp>100000.0</kp>
+        <kd>100.0</kd>
+    </gazebo>
+    <gazebo>
+    <!-- ros2_control plugin -->
+    <plugin filename="gz_ros2_control-system"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find tinycar_controller)/config/tinycar_controller.yaml</parameters>
+    </plugin>
+
+    <!-- Gazebo sensors system -->
+    <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system"/>
+    <plugin name="gz::sim::systems::Imu" filename="gz-sim-imu-system"/>
+  </gazebo>
+
+</robot>
