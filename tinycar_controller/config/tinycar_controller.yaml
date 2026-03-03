@@ -10,10 +10,12 @@ controller_manager:
 
 diff_drive_controller:
   ros__parameters:
-    publish_rate: 50.0
-    base_frame_id: base_footprint
+    
     odom_frame_id: odom
+    base_frame_id: base_footprint
     enable_odom_tf: true
+    publish_rate: 50.0
+
     use_stamped_vel: false
 
     # 6-wheel skid steer: 3 wheels per side
@@ -22,11 +24,13 @@ diff_drive_controller:
     right_wheel_names:
       - right_wheel_joint
     # MUST match your real robot later. For now, use your xacro properties if you want.
-    wheel_separation: 0.1645
+    wheel_separation: 0.143
     wheel_radius: 0.022
 
-    cmd_vel_timeout: 0.5
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.01]
+
     linear.x.has_velocity_limits: true
     linear.x.max_velocity: 0.5
     angular.z.has_velocity_limits: true
-    angular.z.max_velocity: 1.5
+    angular.z.max_velocity: 1.0
