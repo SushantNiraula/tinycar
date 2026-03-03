@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Adds canonical sensor frames attached to base_link -->
+  <xacro:macro name="agribot_sensors" params="">
+
+    <!-- ================= IMU ================= -->
+    <!-- Canonical IMU frame -->
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+      <!-- Put the IMU where it physically sits on the robot.
+           Example values only. Replace with your measured mounting position. -->
+      <origin xyz="0.0369 -0.03 -0.0245" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+    </joint>
+
+    <!-- Optional: a simple visual/collision so you can see it in RViz/Gazebo -->
+    <link name="imu_link_visual">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><box size="0.03 0.02 0.01"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry><box size="0.03 0.02 0.01"/></geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.02"/>
+        <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="imu_visual_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="imu_link"/>
+      <child link="imu_link_visual"/>
+    </joint>
+     <!-- ================= LiDAR ================= -->
+    <!-- Nav2 convention is usually base_laser -->
+    <link name="base_laser"/>
+    <joint name="base_laser_joint" type="fixed">
+      <!-- Example: center-front, slightly up -->
+      <origin xyz="0.0408 0.0  0.062" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="base_laser"/>
+    </joint>
+
+    <!-- Optional visual -->
+    <link name="lidar_visual">
+      <visual>
+        <geometry><cylinder radius="0.04" length="0.02"/></geometry>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="0.04" length="0.02"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.02"/>
+        <inertia ixx="1e-5" iyy="1e-5" izz="1e-5" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="lidar_visual_joint" type="fixed">
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <parent link="base_laser"/>
+      <child link="lidar_visual"/>
+    </joint>
+
+    
+    
+  </xacro:macro>
+
+</robot>

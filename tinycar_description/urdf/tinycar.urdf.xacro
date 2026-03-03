@@ -3,6 +3,9 @@
      <!--Gazebo and ros2 control plugins-->
   <xacro:include filename="$(find tinycar_description)/urdf/controllers/tinycar.ros2_control.xacro"/>
   <xacro:include filename="$(find tinycar_description)/urdf/controllers/tinycar.gazebo.xacro"/>
+
+<xacro:include filename="$(find tinycar_description)/urdf/sensors/tinycar.sensors.xacro"/>
+
     <link name="base_footprint" />
 
     <link name="base_link">
@@ -145,5 +148,6 @@
         <child link="caster_wheel"/>
         <origin xyz="0.045 0.0 -0.0265" rpy="0 0 0" />
     </joint>
+    <xacro:agribot_sensors/>
 
 </robot>
